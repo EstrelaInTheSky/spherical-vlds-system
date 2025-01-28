@@ -16,7 +16,7 @@ contains
         call RProb6%setUns(RProb6%toDecimal() * 1101513973)
         call RProb6%setUns(RProb6%toDecimal() + iand(ishft(RProb2%toDecimal(), -31), 1) * 16806 * RProb6%toDecimal())
         call RProb7%setUns(RProb7%toDecimal() * 1101513973)
-        call RProb7%setUns(RProb7%toDecimal() * 16807)
+        call RProb7%setUns(RProb7%toDecimal() * (16807))
         call RProb3%setUns(RProb3%toDecimal() * 1101513973)
         call RProb3%setUns(RProb3%toDecimal() + iand(ishft(RProb2%toDecimal(), -31), 1) * 16806 * RProb3%toDecimal())
         call RProb4%setUns(RProb4%toDecimal() * 1101513973)
@@ -25,11 +25,11 @@ contains
         ! RProb String.
         RStrProb = ishft(ishft(RProb1%toDecimal(), -26), 26) + ishft(ishft(RProb6%toDecimal(), -26), 20) + ishft(ishft(RProb4%toDecimal(), -27), 15) &
                    + ishft(ishft(RProb3%toDecimal(), -27), 10) + ishft(ishft(RProb5%toDecimal(), -27), 5) + ishft(RProb7%toDecimal(), -27)
-        RProb = real(RStrProb, kind=c_double) / MAX_INT32
+        RProb = real(RStrProb, kind=c_double)/ (2500000000.0)
     end function RProb
 
     ! Randomic Line Function.
-    real(c_double) function RLine(XAxis)
+    integer(c_int) function RLine(XAxis)
         integer(c_int), intent(in) :: XAxis
         integer(c_int) :: RStrLine
         ! RLine Operations.
@@ -52,7 +52,7 @@ contains
     end function RLine
 
     ! Randomic Column Function.
-    real(c_double) function RCol(YAxis)
+    integer(c_int) function RCol(YAxis)
         integer(c_int), intent(in) :: YAxis
         integer(c_int) :: RStrCol
         ! RCol Operations.
@@ -75,7 +75,7 @@ contains
     end function RCol
 
     ! Randomic Neighbor Function.
-    real(c_double) function RNbr(NbrQuantity)
+    integer(c_int) function RNbr(NbrQuantity)
         integer(c_int), intent(in) :: NbrQuantity
         integer(c_int) :: RStrNbr
         ! RNbr Operations.
@@ -97,5 +97,3 @@ contains
         RNbr = int((real(RStrNbr, kind=c_double) / MAX_INT32) * NbrQuantity, kind=c_int)
     end function RNbr
 end module rnd_generator
-
-
