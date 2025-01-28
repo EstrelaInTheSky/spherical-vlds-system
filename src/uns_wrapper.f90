@@ -1,4 +1,5 @@
 module uns_wrapper
+    use iso_c_binding, only: c_int, c_double
     implicit none
     ! Bits Quantity.
     integer, parameter :: UINT_BIT = 32
@@ -23,6 +24,6 @@ contains
         class(uint32), intent(in) :: CurrValue
         integer :: DecValue
 
-        DecValue = iand(CurrValue%value, z'FFFFFFFF')
+        DecValue = abs(iand(CurrValue%value, z'FFFFFFFF'))
     end function to_decimal
 end module uns_wrapper
