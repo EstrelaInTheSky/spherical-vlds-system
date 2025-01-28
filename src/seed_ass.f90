@@ -3,10 +3,10 @@ module seed_ass
     use c_to_fort
     use uns_wrapper
     implicit none
-    integer(c_int), parameter :: MAX_INT24 = 99999999
-    integer(c_int), parameter :: MIN_INT24 = 10000000
+    integer(c_int), parameter :: MAX_INT24 = 999999999
+    integer(c_int), parameter :: MIN_INT24 = 100000000
     ! Chosen Seed Archive Name.
-    character(len=*), parameter :: SAVE_FILE = "Chosen-RAN3-OddSeed.dat"
+    character(len=*), parameter :: SAVE_FILE = "Chosen-RAN3.dat"
     ! Array Percolation.
     integer :: i, j
     ! RAN3 Seed.
@@ -43,7 +43,7 @@ contains
         do
             read(3) tmpValue
             ! Putting OddNum is Desired Interval.
-            tmpValue = mod(tmpValue, (MAX_INT24 - MIN_INT24 + 1)) + MIN_INT24
+            tmpValue = abs(mod(tmpValue, (MAX_INT24 - MIN_INT24 + 1))) + MIN_INT24
             if (mod(tmpValue, 2) == 0) tmpValue = tmpValue - 1
             call OddNum%setUns(tmpValue)
             if (IsChoiced(OddNum) .eqv. .false.) then
